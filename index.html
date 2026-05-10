@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動画・GIFギャラリー</title>
+    <style>
+        /* 全体のレイアウト */
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            color: #333;
+            background-color: #fafafa;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+        }
+
+        /* ボタンのデザイン：スマホで押しやすく、折り返せるように */
+        .tab-menu {
+            display: flex;
+            flex-wrap: wrap;
+            /* 画面幅が狭い時に自動で改行 */
+            justify-content: center;
+            gap: 10px;
+            /* ボタン同士の隙間 */
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            /* ボタンを均等な幅に（お好みで） */
+            min-width: 120px;
+            /* ボタンが小さくなりすぎないように */
+            padding: 12px 15px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background: #fff;
+            border-radius: 25px;
+            /* 角を丸くしてモダンに */
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn.active {
+            background: #333;
+            color: #fff;
+            border-color: #333;
+        }
+
+        /* コンテンツエリア */
+        .content {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+            /* ふわっと表示させる演出 */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 画像・動画のレスポンシブ化 */
+        video,
+        img {
+            max-width: 100%;
+            /* 親要素の幅を超えない */
+            height: auto;
+            /* アスペクト比を維持 */
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto 15px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin-top: 0;
+        }
+
+        p {
+            line-height: 1.6;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* スマホ向けの微調整 */
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+
+            .tab-btn {
+                font-size: 0.8rem;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>プレゼミ用アニメーション倉庫</h2>
+
+    <div class="tab-menu">
+        <button class="tab-btn active" onclick="showContent(0)">学外制作</button>
+        <button class="tab-btn" onclick="showContent(1)">自主制作１</button>
+        <button class="tab-btn" onclick="showContent(2)">自主制作２</button>
+    </div>
+
+    <div id="item0" class="content active">
+        <h3>エモちゃんゆらゆら〜</h3>
+        <video src="エモちゃん.mp4" controls muted playsinline></video>
+        <p>DJイベント「私の音だってエモいもん！」にてイベントキャラクター「エモちゃん」を描き、アニメーションを作りました。</p>
+    </div>
+
+    <div id="item1" class="content">
+        <h3>自主制作１</h3>
+        <img src="アザラシ.gif" alt="アザラシのアニメーション">
+        <p>Live2Dを使ってオリジナルキャラを動かしてみました。</p>
+    </div>
+
+    <div id="item2" class="content">
+        <h3>自主制作２</h3>
+        <img src="足ぶらぶら.gif" alt="足ぶらぶらのアニメーション">
+        <p>After Effectsを使ってオリジナルキャライラストを動かしてみました。</p>
+    </div>
+
+    <script>
+        function showContent(index) {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(c => c.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+
+            document.getElementById('item' + index).classList.add('active');
+            buttons[index].classList.add('active');
+        }
+    </script>
+
+</body>
+
+</html>
